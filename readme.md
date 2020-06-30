@@ -20,4 +20,4 @@
 <p>Refer to the requirements.txt file</p2>
 
 <h2>HEROKU LINK</h2>
-<a href="www.ecommerce-app2.herokuapp.com">Ecommerce app</a>
+<a href="http://www.ecommerce-app2.herokuapp.com">Ecommerce app</a>
