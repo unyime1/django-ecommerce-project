@@ -1,0 +1,68 @@
+{% load static %}
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"> <!-- fixed-top -->
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}"> <img src="{% static 'images/logo.png' %}" alt="logo"> </a>
+
+            <!-- links toggle -->
+            <button class="navbar-toggler order-first" type="button" data-toggle="collapse" data-target="#links" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse order-3 order-lg-2" id="links">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link nav-item" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-item" href="{% url 'store' %}">Store</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-item" href="{% url 'contact' %}"><span>Contact Us</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-item" href="{% url 'register' %}"><span class="fa fa-user"></span> Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-item" href="{% url 'login' %}"><span class="fa fa-sign-in"></span> Login</a>
+                    </li>
+
+                    {% if request.user.is_authenticated %}
+                    
+                    <li class="nav-item">
+                        <a class="nav-link nav-item" href="{% url 'logout' %}"><span class="fa fa-sign-out"></span> Logout</a>
+                    </li>
+                    {% endif %}
+                
+                </ul>
+            </div>
+
+
+            <!--cart section-->
+            <div class="form-inline my-2 my-lg-0 order-2 order-lg-3">
+                <a href="{% url 'cart' %}">
+                <img  id="cart-icon" src="{% static 'images/cart.png' %}">
+            </a>
+            <p id="cart-total">{{cart_quantity}}</p>
+            </div>
+        
+        </div>
+        
+    </nav>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
