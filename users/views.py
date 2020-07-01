@@ -91,7 +91,7 @@ def userLogin(request):
         #login user
         if user is not None:
             login(request, user)
-            return redirect('store')
+            return redirect('profile')
         else:
             messages.info(request, 'username or password is incorrect!')
             return redirect('login')
@@ -149,7 +149,7 @@ def userProfile(request):
 
     #database queries
     customer = request.user.customer
-    orders = request.user.customer.order_set.all()
+    orders = request.user.customer.order_set.all().filter(complete='True')
     total_orders = orders.count()
     delivered = orders.filter(status='Delivered').count()
     pending = orders.filter(status='Pending').count()
