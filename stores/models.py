@@ -11,7 +11,7 @@ class Product(models.Model):
     image = models.ImageField(default='placeholder.png', null=True, blank=True, upload_to='images/')
 
     def __str__(self):
-        return self.name 
+        return self.name  
 
     @property
     def imageURL(self):
@@ -75,9 +75,6 @@ class Order(models.Model):
         total = sum([item.quantity for item in orderitems])
         #return the total cost
         return total
-
-    
-
 
 
 class OrderItem(models.Model):

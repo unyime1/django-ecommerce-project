@@ -70,7 +70,6 @@
             <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Transaction ID</th>
                     <th scope="col">Date Ordered</th>
                     <th scope="col">Total Amount</th>
@@ -81,8 +80,7 @@
                     {% for order in orders %}
                         {% if order.complete %}
                             <tr>
-                                <th scope="row">{{order.id}}</th>
-                                <td> {{order.transaction_id}} </td>
+                                <th scope="row"> {{order.transaction_id}} </th>
                                 <td> {{order.date_ordered}} </td>
                                 <td> ₦{{order.get_cart_total}} </td>
                                 <td> {{order.status}} </td>

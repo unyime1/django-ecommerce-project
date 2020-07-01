@@ -229,3 +229,39 @@ def processOrder(request):
         )
 
     return JsonResponse('Payment complete', safe=False)
+
+
+def orderDetailsPage(request, order_id):
+    """This function renders the view that gives the detailed overview of individual orders"""
+
+    #database queries
+    order = Order.objects.get(id=order_id)
+    shipping_information = order.shippingaddress_set.all()
+
+    #product information
+    product_information = order.orderitem_set.all()
+
+    #order details
+    status = order.status
+    transaction_id = order.transaction_id
+    date_ordered = shipping_information.date_added
+
+    #customer information
+    first_name = order.customer.first_name
+    last_name = order.customer.last_name
+    email = order.customer.email
+    phone_number = order.customer.phone_number
+
+    #shipping information
+    address = shipping_information.address
+    city = shipping_information.city
+    state = shipping_information.state
+    
+
+
+    context = {'order':order, 'shipping_information':shipping_information, 'product_information':product_information,
+                'status':status, 'date_ordered':date_ordered, 'first_name':first_name, 'last_name':last_name,
+                'email':email, 'phone_number':phone_number, 'address':address, 'city':city, 'state':state,
+                'transaction_id':transaction_id,
+                 }
+    return render(request, 'stores/order_page.html', context)
