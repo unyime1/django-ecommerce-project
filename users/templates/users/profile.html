@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <p>Hello {{customer.first_name}}</p>
+            <p>Hello {{customer.first_name}} {{customer.last_name}}</p>
             <p>Please find below a summary of your purchases from our store.</p>
         </div>
     </div>
@@ -19,31 +19,20 @@
                             <h5 class="card-title">Total Orders</h5>
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">{{total_orders}}</h3>
+                            <h3 class="card-title"><span class="fa fa-shopping-cart fa-2x"></span> {{total_orders}}</h3>
                         </div>
                     </div>
                 </div>
                 
-            
-                <div class="col-md-3">
-                    <div class="card text-center text-white  mb-3" id="orders-delivered">
-                        <div class="card-header">
-                            <h5 class="card-title">Orders Delivered</h5>
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">{{delivered}}</h3>
-                        </div>
-                    </div>
-                </div>
             
                 
                 <div class="col-md-3">
                     <div class="card text-center text-white  mb-3" id="orders-pending">
                         <div class="card-header">
-                            <h5 class="card-title">Orders Pending</h5>
+                            <h5 class="card-title">Orders We're Processing</h5>
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">{{pending}}</h3>
+                            <h3 class="card-title"><span class="fa fa-cog fa-spin fa-2x fa-fw"></span> {{processing}}</h3>
                         </div>
                     </div>
                 </div>
@@ -52,10 +41,22 @@
                 <div class="col-md-3">
                     <div class="card text-center text-white  mb-3" id="orders-shipped">
                         <div class="card-header">
-                            <h5 class="card-title">Orders Shipped</h5>
+                            <h5 class="card-title">Orders We've Shipped</h5>
                         </div>
                         <div class="card-body">
-                            <h3 class="card-title">{{shipped}}</h3>
+                            <h3 class="card-title"><span class="fa fa-ship fa-2x"></span> {{shipped}}</h3>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="card text-center text-white  mb-3" id="orders-delivered">
+                        <div class="card-header">
+                            <h5 class="card-title">Orders We've Delivered</h5>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title"><span class="fa fa-check fa-2x"></span> {{delivered}}</h3>
                         </div>
                     </div>
                 </div>
@@ -80,7 +81,7 @@
                     {% for order in orders %}
                         {% if order.complete %}
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row">{{order.id}}</th>
                                 <td> {{order.transaction_id}} </td>
                                 <td> {{order.date_ordered}} </td>
                                 <td> ₦{{order.get_cart_total}} </td>

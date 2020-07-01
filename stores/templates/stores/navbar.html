@@ -13,28 +13,29 @@
             <div class="collapse navbar-collapse order-3 order-lg-2" id="links">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link nav-item" href="{% url 'home' %}">Home</a>
+                        <a class="nav-link nav-item" href="{% url 'home' %}"><span class="fa fa-home"></span> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-item" href="{% url 'store' %}">Store</a>
+                        <a class="nav-link nav-item" href="{% url 'store' %}"><span class="fa fa-shopping-cart"></span> Store</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-item" href="{% url 'contact' %}"><span>Contact Us</span></a>
+                        <a class="nav-link nav-item" href="{% url 'contact' %}"><span class="fa fa-address-book"> Contact Us</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-item" href="{% url 'register' %}"><span class="fa fa-user"></span> Sign Up</a>
+                        <a class="nav-link nav-item" href="{% url 'register' %}"><span class="fa fa-plus"></span> Sign Up</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-item" href="{% url 'login' %}"><span class="fa fa-sign-in"></span> Login</a>
                     </li>
 
                     {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link nav-item" href="{% url 'profile' %}"><span class="fa fa-profile"></span> Profile</a>
-                    </li>
 
                     <li class="nav-item">
                         <a class="nav-link nav-item" href="{% url 'logout' %}"><span class="fa fa-sign-out"></span> Logout</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav-item" href="{% url 'profile' %}"><span class="fa fa-user"></span> Profile</a>
                     </li>
                     {% endif %}
                 

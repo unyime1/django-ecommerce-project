@@ -152,11 +152,11 @@ def userProfile(request):
     orders = request.user.customer.order_set.all().filter(complete='True')
     total_orders = orders.count()
     delivered = orders.filter(status='Delivered').count()
-    pending = orders.filter(status='Pending').count()
+    processing = orders.filter(status='Processing').count()
     shipped = orders.filter(status='Shipped').count()
 
     context = {'cart_quantity': cart_quantity, 'orders': orders,
                 'total_orders': total_orders, 'delivered': delivered,
-                'pending': pending, 'shipped': shipped, 'customer':customer}
+                'processing': processing, 'shipped': shipped, 'customer':customer}
     return render(request, 'users/profile.html', context)
 

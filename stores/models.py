@@ -28,7 +28,7 @@ class Order(models.Model):
     """this model handles the customer orders"""
 
     STATUS = (
-        ('Pending', 'Pending'),
+        ('Processing', 'Processing'),
         ('Shipped', 'Shipped'),
         ('Delivered', 'Delivered'), 
     )
@@ -36,7 +36,7 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, null=True, blank=False)
-    status = models.CharField(max_length=200, null=True, blank=True, choices=STATUS, default='Pending')
+    status = models.CharField(max_length=200, null=True, blank=True, choices=STATUS, default='Processing')
     transaction_id = models.CharField(max_length=200, null=True)
 
     def __str__(self):
@@ -75,6 +75,8 @@ class Order(models.Model):
         total = sum([item.quantity for item in orderitems])
         #return the total cost
         return total
+
+    
 
 
 
