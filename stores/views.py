@@ -237,27 +237,18 @@ def orderDetailsPage(request, order_id):
     #database queries
     order = Order.objects.get(id=order_id)
     shipping_information = order.shippingaddress_set.all()
-
+    
+    #we need a loop to access individual shipping address
+    for info in shipping_information:
+        address = info.address
+        city = info.city
+        state = info.state
+        country = info.country
+        order_date = info.date_added
+        
     #product information
     product_information = order.orderitem_set.all()
 
-    #order details
-    #status = order.status
-    #transaction_id = order.transaction_id
-    #date_ordered = shipping_information.date_added
-
-    #customer information
-    #first_name = order.customer.first_name
-    #last_name = order.customer.last_name
-    #email = order.customer.email
-    #phonenumber = order.customer.phonenumber
-
-    #shipping information
-    #address = shipping_information.address
-    #city = shipping_information.city
-    #state = shipping_information.state
-    
-
-
-    context = {'order':order, 'shipping_information':shipping_information, 'product_information':product_information}
+    context = {'order':order, 'shipping_information':shipping_information, 'product_information':product_information,
+        'address':address, 'city':city, 'state':state, 'country':country, 'order_date':order_date,}
     return render(request, 'stores/order_page.html', context)
