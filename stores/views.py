@@ -242,26 +242,22 @@ def orderDetailsPage(request, order_id):
     product_information = order.orderitem_set.all()
 
     #order details
-    status = order.status
-    transaction_id = order.transaction_id
-    date_ordered = shipping_information.date_added
+    #status = order.status
+    #transaction_id = order.transaction_id
+    #date_ordered = shipping_information.date_added
 
     #customer information
-    first_name = order.customer.first_name
-    last_name = order.customer.last_name
-    email = order.customer.email
-    phone_number = order.customer.phone_number
+    #first_name = order.customer.first_name
+    #last_name = order.customer.last_name
+    #email = order.customer.email
+    #phonenumber = order.customer.phonenumber
 
     #shipping information
-    address = shipping_information.address
-    city = shipping_information.city
-    state = shipping_information.state
+    #address = shipping_information.address
+    #city = shipping_information.city
+    #state = shipping_information.state
     
 
 
-    context = {'order':order, 'shipping_information':shipping_information, 'product_information':product_information,
-                'status':status, 'date_ordered':date_ordered, 'first_name':first_name, 'last_name':last_name,
-                'email':email, 'phone_number':phone_number, 'address':address, 'city':city, 'state':state,
-                'transaction_id':transaction_id,
-                 }
+    context = {'order':order, 'shipping_information':shipping_information, 'product_information':product_information}
     return render(request, 'stores/order_page.html', context)

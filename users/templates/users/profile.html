@@ -80,7 +80,7 @@
                     {% for order in orders %}
                         {% if order.complete %}
                             <tr>
-                                <th scope="row"> {{order.transaction_id}} </th>
+                                <th scope="row"><a href=" {% url 'order' order.id %} ">{{order.transaction_id}}</a>  </th>
                                 <td> {{order.date_ordered}} </td>
                                 <td> ₦{{order.get_cart_total}} </td>
                                 <td> {{order.status}} </td>
