@@ -1,33 +1,33 @@
 {% extends 'stores/main_template.html' %}
 
 {% block content %}
-{% include 'stores/breadcrumb.html' %} 
 
 <div class="container">
-    <h3>Register</h3>
+ 
     <div class="row">
         <div class="col-md-2"></div>
 
         <div class="col-md-8">
-            <form method="post">
-                {% csrf_token %}
-                {% for field in form %}
-                  <p>
-                    {{ field.label_tag }}<br>
-                    {{ field }}
-                    {% if field.help_text %}
-                      <small style="color: grey">{{ field.help_text }}</small>
-                    {% endif %}
-                    {% for error in field.errors %}
-                      <p style="color: red">{{ error }}</p>
-                    {% endfor %}
-                  </p>
-                {% endfor %}
-                <button type="submit">Sign up</button>
-            </form>
-            <div class=" ">
-                Already have an account? <a href="{% url 'login' %}" class="ml-2">Login</a>
-            </div>
+          <h3>Register</h3>
+          <form method="post">
+              {% csrf_token %}
+              {% for field in form %}
+                <p>
+                  {{ field.label_tag }}<br>
+                  {{ field }}
+                  {% if field.help_text %}
+                    <small style="color: grey">{{ field.help_text }}</small>
+                  {% endif %}
+                  {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+                </p>
+              {% endfor %}
+              <button type="submit">Sign up</button>
+          </form>
+          <div class=" ">
+              Already have an account? <a href="{% url 'login' %}" class="ml-2">Login</a>
+          </div>
         </div>
         <div class="col-md-2"></div>
        

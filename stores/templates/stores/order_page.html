@@ -28,7 +28,7 @@
           <tr>
             <th scope="row">Order Date</th>
             <td></td>
-            <td>{{order_date}}</td>
+            <td>{{shipping_information.date_added}}</td>
             
           </tr>
           <tr>
@@ -115,7 +115,7 @@
           <tr>
             <th scope="col">Address</th>
             <th scope="col"></th>
-            <th scope="col">{{address}}</th>
+            <th scope="col">{{shipping_information.address}}</th>
             
           </tr>
         </thead>
@@ -123,19 +123,19 @@
           <tr>
             <th scope="row">City</th>
             <td></td>
-            <td>{{city}}</td>
+            <td>{{shipping_information.city}}</td>
             
           </tr>
           <tr>
             <th scope="row">State</th>
             <td></td>
-            <td>{{state}}</td>
+            <td>{{shipping_information.state}}</td>
             
           </tr>
           <tr>
             <th scope="row">Country</th>
             <td></td>
-            <td> {{country}} </td>
+            <td> {{shipping_information.country}}</td>
             
           </tr>
         </tbody>

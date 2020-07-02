@@ -8,9 +8,10 @@ from django.contrib.auth.decorators import login_required
 from stores.models import *
 from stores.utils import *
 from .forms import *
+from stores.decorators import *
 
  
-
+@unauthenticated_users
 def userRegistration(request):
     """this function handles the register view"""
 
@@ -66,7 +67,7 @@ def userRegistration(request):
     return render(request, 'users/register.html', context)
 
 
-
+@unauthenticated_users
 def userLogin(request):
     """this function handles the login view"""
 
@@ -74,16 +75,8 @@ def userLogin(request):
 
     #pull login data from form
     if request.method == "POST":
-        email = request.POST.get('email')
+        username = request.POST.get('username')
         password = request.POST.get('password')
-
-        #pull username with specified email
-        try:
-            customer = Customer.objects.get(email=email)
-        except Customer.DoesNotExist:
-            return redirect('login')
-
-        username = customer.username
         
         #authenticate the user
         user = authenticate(request, username=username, password=password)

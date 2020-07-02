@@ -1,7 +1,7 @@
 {% load static %}
 
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light"> <!-- fixed-top -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top "> <!-- -->
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}"> <img src="{% static 'images/logo.png' %}" alt="logo"> </a>
 
@@ -21,12 +21,7 @@
                     <li class="nav-item">
                         <a class="nav-link nav-item" href="{% url 'contact' %}"><span class="fa fa-address-book"> Contact Us</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-item" href="{% url 'register' %}"><span class="fa fa-plus"></span> Sign Up</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-item" href="{% url 'login' %}"><span class="fa fa-sign-in"></span> Login</a>
-                    </li>
+                    
 
                     {% if request.user.is_authenticated %}
 
@@ -37,6 +32,15 @@
                     <li class="nav-item">
                         <a class="nav-link nav-item" href="{% url 'profile' %}"><span class="fa fa-user"></span> Profile</a>
                     </li>
+                    {% else %}
+
+                    <li class="nav-item">
+                        <a class="nav-link nav-item" href="{% url 'register' %}"><span class="fa fa-plus"></span> Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-item" href="{% url 'login' %}"><span class="fa fa-sign-in"></span> Login</a>
+                    </li>
+
                     {% endif %}
                 
                 </ul>

@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
 import datetime
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from .models import *
 from .utils import *
+from .decorators import *
  
 
 def home(request):
@@ -230,25 +232,28 @@ def processOrder(request):
 
     return JsonResponse('Payment complete', safe=False)
 
-
+@login_required(login_url='login')
 def orderDetailsPage(request, order_id):
     """This function renders the view that gives the detailed overview of individual orders"""
 
+    if request.user.is_authenticated:
+        customer = request.user.customer
+
+    else:
+        #get the guest user logic from utils.py module
+        customer = guestUser(request) 
+
+    #get customer's uncompleted orders(open cart). If none, create the order.
+    order_c, created = Order.objects.get_or_create(customer=customer, complete=False)
+
+    #get cart items from order model property
+    cart_quantity = order_c.get_cart_quantity 
+
     #database queries
     order = Order.objects.get(id=order_id)
-    shipping_information = order.shippingaddress_set.all()
-    
-    #we need a loop to access individual shipping address
-    for info in shipping_information:
-        address = info.address
-        city = info.city
-        state = info.state
-        country = info.country
-        order_date = info.date_added
-        
-    #product information
+    shipping_information = order.shippingaddress_set.get(order=order.id)
     product_information = order.orderitem_set.all()
 
-    context = {'order':order, 'shipping_information':shipping_information, 'product_information':product_information,
-        'address':address, 'city':city, 'state':state, 'country':country, 'order_date':order_date,}
+    context = {'order':order, 'shipping_information':shipping_information,
+        'product_information':product_information, 'cart_quantity':cart_quantity,}
     return render(request, 'stores/order_page.html', context)
