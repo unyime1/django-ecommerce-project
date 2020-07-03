@@ -22,10 +22,12 @@ for(var i = 0; i < updateBtns.length; i++){
     })
 }
 
+
 function updateUserOrder(productId, action) {
     // this function sends api data to the updateItem view
    // console.log('User is logged in. Sending data...')
 
+   
     // send data to the url
     var url = '/update_item/'
 
@@ -39,7 +41,7 @@ function updateUserOrder(productId, action) {
             'X-CSRFToken' : csrftoken,
         },
         //define the body
-        body : JSON.stringify({'productId': productId, 'action': action})
+        body : JSON.stringify({'productId': productId, 'action': action}),
     })
 
     // return a promise from fetch, and turn into json value

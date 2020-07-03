@@ -3,13 +3,14 @@ from django.http import JsonResponse
 import json
 import datetime
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 # Create your views here.
 from .models import *
 from .utils import *
 from .decorators import *
  
-
+@ensure_csrf_cookie
 def home(request):
     """this function handles the home view"""
 
@@ -34,7 +35,7 @@ def home(request):
     return render(request, 'stores/home.html', context)
 
 
-
+@ensure_csrf_cookie
 def store(request):
     """this function handles the store view"""
 
@@ -63,7 +64,7 @@ def store(request):
     return render(request, 'stores/store.html', context)
 
 
-
+@ensure_csrf_cookie
 def checkout(request):
     """this function handles the checkout view"""
 
@@ -88,7 +89,7 @@ def checkout(request):
     return render(request, 'stores/checkout.html', context)
 
 
-
+@ensure_csrf_cookie
 def contact(request):
     """this function handles the contact view"""
 
@@ -113,7 +114,7 @@ def contact(request):
     return render(request, 'stores/contact.html', context)
 
 
-
+@ensure_csrf_cookie
 def cart(request):
     """this function handles the cart view"""
 
@@ -232,6 +233,7 @@ def processOrder(request):
 
     return JsonResponse('Payment complete', safe=False)
 
+@ensure_csrf_cookie
 @login_required(login_url='login')
 def orderDetailsPage(request, order_id):
     """This function renders the view that gives the detailed overview of individual orders"""

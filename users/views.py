@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.models import Group #database groups
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 # Create your views here.
 from stores.models import *
@@ -118,6 +119,7 @@ def userLogout(request):
     return redirect('login')
 
 
+@ensure_csrf_cookie
 @login_required(login_url='login')
 def userProfile(request):
     """this function handles the profile view"""
