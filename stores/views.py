@@ -217,7 +217,9 @@ def processOrder(request):
     #we need to conform that both the frontend and backend totals are the same before processing order
     if total == order.get_cart_total:
         order.complete = True
-    order.save()
+        order.save()
+    else:
+        order.delete()
 
     if order.shipping == True:
         ShippingAddress.objects.create(
@@ -232,6 +234,7 @@ def processOrder(request):
         )
 
     return JsonResponse('Payment complete', safe=False)
+
 
 @ensure_csrf_cookie
 @login_required(login_url='login')
