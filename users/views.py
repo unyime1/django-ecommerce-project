@@ -73,22 +73,27 @@ def userLogin(request):
     """this function handles the login view"""
 
     #user login logic
-
+    form = LoginForm()
     #pull login data from form
     if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        
-        #authenticate the user
-        user = authenticate(request, username=username, password=password)
+        form = LoginForm(request.POST)
 
-        #login user
-        if user is not None:
-            login(request, user)
-            return redirect('profile')
-        else:
-            messages.info(request, 'username or password is incorrect!')
-            return redirect('login')
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            
+            #authenticate the user
+            user = authenticate(request, username=username, password=password)
+
+            #login user
+            if user is not None:
+                login(request, user)
+                return redirect('profile')
+            else:
+                messages.info(request, 'username or password is incorrect!')
+                return redirect('login')
+    else:
+        form = LoginForm()
 
 
     if request.user.is_authenticated:
@@ -108,7 +113,7 @@ def userLogin(request):
     #get cart items from order model property
     cart_quantity = order.get_cart_quantity
 
-    context = {'cart_quantity': cart_quantity}
+    context = {'cart_quantity': cart_quantity, 'form':form}
     return render(request, 'users/login.html', context)
 
 

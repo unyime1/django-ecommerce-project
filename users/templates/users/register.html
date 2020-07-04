@@ -1,35 +1,47 @@
 {% extends 'stores/main_template.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div class="container">
  
     <div class="row">
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
 
-        <div class="col-md-8">
+        <div class="col-md-10">
           <h3>Register</h3>
           <form method="post">
-              {% csrf_token %}
-              {% for field in form %}
-                <p>
-                  {{ field.label_tag }}<br>
-                  {{ field }}
-                  {% if field.help_text %}
-                    <small style="color: grey">{{ field.help_text }}</small>
-                  {% endif %}
-                  {% for error in field.errors %}
-                    <p style="color: red">{{ error }}</p>
-                  {% endfor %}
-                </p>
-              {% endfor %}
-              <button type="submit">Sign up</button>
+            {% csrf_token %}
+            <div class="form-row">
+              <div class="col-md-5">
+                {{form.first_name|as_crispy_field}}
+              </div>
+              <div class="col-md-5">
+                {{form.last_name|as_crispy_field}}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-5">
+                {{form.username|as_crispy_field}}
+              </div>
+              <div class="col-md-5">
+                {{form.email|as_crispy_field}}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-5">
+                {{form.password1|as_crispy_field}}
+              </div>
+              <div class="col-md-5">
+                {{form.password2|as_crispy_field}}
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
           </form>
           <div class=" ">
               Already have an account? <a href="{% url 'login' %}" class="ml-2">Login</a>
           </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
        
     </div>
     
