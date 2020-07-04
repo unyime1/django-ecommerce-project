@@ -21,14 +21,16 @@ class RegistrationForm(UserCreationForm):
     def clean_email(self):
         """this function handles email cleaning"""
         email = self.cleaned_data['email']
-        try:
-            match = Customer.objects.get(email=email)
-        except Customer.DoesNotExist:
+        match = User.objects.filter(email=email).exists()
+        
+        if match:
+            raise forms.ValidationError(_('The email already exists. Choose another'))
+        else:
             return email
-        raise forms.ValidationError(_('The email already exists. Choose another'))
+           
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(required=True, label='Username', widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
+    username = forms.CharField(required=True, label='Username')
     password = forms.CharField(required=True, widget=forms.PasswordInput)
     

@@ -10,7 +10,7 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=200, null=True)
     last_name = models.CharField(max_length=200, null=True)
     username = models.CharField(max_length=200, null=True)
-    email = models.EmailField(max_length=200, null=True, unique=True)
+    email = models.EmailField(max_length=200, null=True) 
     phonenumber = models.CharField(max_length=200, null=True)
     device = models.CharField(max_length=200, null=True, blank=True)
 
