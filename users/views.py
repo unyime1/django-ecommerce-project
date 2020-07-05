@@ -5,19 +5,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import ensure_csrf_cookie
 
-#for confirmation emails
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_text
-from django.template.loader import render_to_string
-from .token import account_activation_token
-from django.core.mail import EmailMessage
+
 
 # Create your views here.
 from stores.models import *
 from stores.utils import *
-from .forms import *
+from users.forms import *
 from stores.decorators import *
+from users.email import *
 
  
 @unauthenticated_users
@@ -51,39 +46,16 @@ def userRegistration(request):
             user.is_active = False
             user.save()
 
-            #add user to the customer group
-            group = Group.objects.get(name='customer')
-            user.groups.add(group)
-
-            
-            #add registered user to Customer model
-            Customer.objects.create(
-                user = user,
-                first_name = user.first_name,
-                last_name = user.last_name,
-                username = user.username,
-                email = user.email,
-            )
+            #activate send mail function
+            send_activation_mail(request, user=user, form=form)
 
             #query username for flash message
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
 
-            messages.success(request, 'Account was created for ' + first_name + ' ' + last_name + '.' + ' Visit you mail to activate your account')
+            messages.success(request, 'Account was created for ' + first_name + ' ' + last_name + '.' + ' Please visit your mail to activate your account')
 
-            #send activation mail
-            current_site = get_current_site(request)
-            email_subject = 'Activate Your Account'
-            message = render_to_string('users/activate_account.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-            to_email = form.cleaned_data.get('email')
-            email = EmailMessage(email_subject, message, to=[to_email])
-            email.send()
-
+           
             return redirect('login')
     else:
         form = RegistrationForm()
@@ -93,7 +65,7 @@ def userRegistration(request):
 
 
 
-def activate_account(request, uidb64, token):
+def activateAccount(request, uidb64, token):
     """function for account activation"""
     try:
         uid = force_bytes(urlsafe_base64_decode(uidb64))

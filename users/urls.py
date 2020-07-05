@@ -1,7 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
-
 from . import views
 
 urlpatterns = [
@@ -24,8 +23,9 @@ urlpatterns = [
         ),
         name='password_reset_complete'),    #template_name="accounts/password_reset_done.html"
 
-    path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        views.activate_account, name='activate'),
+        #send email view
+
+    path('activate/<uidb64>/<token>/', views.activateAccount, name='activate'),
 ]
 
 """
