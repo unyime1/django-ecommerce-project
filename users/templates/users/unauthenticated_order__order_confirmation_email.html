@@ -1,0 +1,16 @@
+
+{% autoescape off %}
+Hi {{ customer_name }},
+Thanks for buying from our store. Please find below details of the your order.
+Transaction ID: {{transaction_id}}
+Number of items: {{number_of_items}}
+Total Cost: ₦{{total_order_cost}}
+Status of Order: {{order_status}}
+Shipping Address: {{shipping_address}}
+
+If you need more information or wish to make a complaint, please send us an email at
+example@example.com. Please include your transaction_id for every correspondence.
+Thanks. 
+
+
+{% endautoescape %} 

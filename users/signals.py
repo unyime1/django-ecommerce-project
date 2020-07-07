@@ -6,11 +6,12 @@ from .models import Customer
 from django.contrib.auth.models import Group
 from django.core import mail
 from django.template.loader import render_to_string
-from django.contrib.sites.models import Site #for obtaining the current site object
+
+#for obtaining the current site object
+from django.contrib.sites.models import Site 
 
 from stores.models import Order
 from stores.models import ShippingAddress
-
 
 
 
@@ -39,6 +40,13 @@ def order_confirmation_email(sender, instance, **kwargs):
     """this function sends order confirmation emails"""
    
     customer = instance.customer
+    customer_name = customer.first_name.capitalize()
+    number_of_items = instance.order.get_cart_quantity
+    total_order_cost = instance.order.get_cart_total
+    order_status = instance.order.status
+    shipping_address = instance.address + ', ' + instance.city + ', ' + instance.state
+    transaction_id = instance.order.transaction_id
+
     order = instance.order
     #get domain from current site
     current_site = Site.objects.get_current().domain
@@ -47,6 +55,7 @@ def order_confirmation_email(sender, instance, **kwargs):
             'customer': customer,
             'order':order,
             'domain': current_site,
+            'customer_name':customer_name,
         })
 
     admin_message = render_to_string('users/admin_order_email.html', {
@@ -55,33 +64,78 @@ def order_confirmation_email(sender, instance, **kwargs):
             'domain': current_site,
         })
 
-    connection = mail.get_connection()
+    unauthenticated_customer_message = render_to_string('users/unauthenticated_order__order_confirmation_email.html', {
+            'customer': customer,
+            'order':order,
+            'customer_name':customer_name,
+            'number_of_items':number_of_items,
+            'total_order_cost':total_order_cost,
+            'order_status':order_status,
+            'shipping_address':shipping_address,
+            'transaction_id':transaction_id
 
-    # Manually open the connection
-    connection.open()
+        })
 
-    # Construct an email message that uses the connection
-    email1 = mail.EmailMessage(
-        'Order Confirmation',
-        customer_message,
-        'from@example.com',
-        [customer.email],
-        connection=connection,
-    )
+    if instance.customer.user:
+        """execute this block if the user is authenticated"""
+        connection = mail.get_connection()
 
-    # Construct two more messages
-    email2 = mail.EmailMessage(
-        'Order Notification',
-        admin_message,
-        'from@example.com',
-        ['lordunyime@yahoo.com'],
-    )
-    
+        # Manually open the connection
+        connection.open()
 
-    # Send the two emails in a single call -
-    connection.send_messages([email1, email2])
-    # The connection was already open so send_messages() doesn't close it.
-    # We need to manually close the connection.
-    connection.close()
+        # Construct an email message that uses the connection
+        email1 = mail.EmailMessage(
+            'Order Confirmation',
+            customer_message,
+            'from@example.com',
+            [customer.email],
+            connection=connection,
+        )
+
+        # Construct two more messages
+        email2 = mail.EmailMessage(
+            'Order Notification',
+            admin_message,
+            'from@example.com',
+            ['lordunyime@yahoo.com'],
+        )
+        
+
+        # Send the two emails in a single call -
+        connection.send_messages([email1, email2])
+        # The connection was already open so send_messages() doesn't close it.
+        # We need to manually close the connection.
+        connection.close()
+
+    else:
+        """execute this block if the user is authenticated"""
+        connection = mail.get_connection()
+
+        # Manually open the connection
+        connection.open()
+
+        # Construct an email message that uses the connection
+        email1 = mail.EmailMessage(
+            'Order Confirmation',
+            unauthenticated_customer_message,
+            'from@example.com',
+            [customer.email],
+            connection=connection,
+        )
+
+        # Construct two more messages
+        email2 = mail.EmailMessage(
+            'Order Notification',
+            admin_message,
+            'from@example.com',
+            ['lordunyime@yahoo.com'],
+        )
+        
+
+        # Send the two emails in a single call -
+        connection.send_messages([email1, email2])
+        # The connection was already open so send_messages() doesn't close it.
+        # We need to manually close the connection.
+        connection.close()
 
 post_save.connect(order_confirmation_email, sender=ShippingAddress) 
