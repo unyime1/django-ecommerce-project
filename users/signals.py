@@ -6,7 +6,7 @@ from .models import Customer
 from django.contrib.auth.models import Group
 from django.core import mail
 from django.template.loader import render_to_string
-#from django.contrib.sites.models import Site
+from django.contrib.sites.models import Site #for obtaining the current site object
 
 from stores.models import Order
 from stores.models import ShippingAddress
@@ -40,18 +40,19 @@ def order_confirmation_email(sender, instance, **kwargs):
    
     customer = instance.customer
     order = instance.order
-    #current_site = Site.objects.get_current()
+    #get domain from current site
+    current_site = Site.objects.get_current().domain
 
     customer_message = render_to_string('users/customer_order_confirmation.html', {
             'customer': customer,
             'order':order,
-            #'domain': current_site.domain,
+            'domain': current_site,
         })
 
     admin_message = render_to_string('users/admin_order_email.html', {
             'customer': customer,
             'order':order,
-            #'domain': current_site.domain,
+            'domain': current_site,
         })
 
     connection = mail.get_connection()

@@ -237,7 +237,6 @@ def processOrder(request):
 
 
 @ensure_csrf_cookie
-@login_required(login_url='login')
 def orderDetailsPage(request, order_id):
     """This function renders the view that gives the detailed overview of individual orders"""
 

@@ -46,8 +46,12 @@ INSTALLED_APPS = [
      #installed app
     'django_filters',
     'storages',
-    'crispy_forms'
+    'crispy_forms',
+
+    #for sites object
+    'django.contrib.sites',
 ]
+SITE_ID = 1
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
