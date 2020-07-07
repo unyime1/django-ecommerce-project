@@ -1,0 +1,8 @@
+{% autoescape off %}
+Hi {{ customer.first_name }},
+Thanks for buying from our store.
+Visit the link below for a detailed overview of your products and 
+the shipping address you provided.
+http://{{ request.get_host }}{% url 'order' order.id %}
+If you need anything, dont forget to email us at admin@admin.com
+{% endautoescape %} 

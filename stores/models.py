@@ -2,7 +2,7 @@ from django.db import models
 
 # import the Customer model from users app
 from users.models import Customer
-
+ 
 class Product(models.Model):
     """this model handles the products in store"""
     name = models.CharField(max_length=200, null=True)
@@ -40,7 +40,7 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.id) 
 
     @property
     def shipping(self):
