@@ -1,9 +1,18 @@
 
 {% autoescape off %}
 Hi {{ customer_name }},
-Thanks for buying from our store.
-Visit the link below for a detailed overview of your products and 
-the shipping address you provided.
+Thanks for buying from our store. Please find below details of the your order.
+Transaction ID: {{transaction_id}}
+Number of items: {{number_of_items}}
+Total Cost: ₦{{total_order_cost}}
+Status of Order: {{order_status}}
+Shipping Address: {{shipping_address}}
+
+If you need more information or wish to make a complaint, please send us an email at
+example@example.com. Please include your transaction_id for every correspondence.
+Thanks. 
+For more information on your order, kindly visit the link below, or copy into your browser.
 http://{{ domain }}{% url 'order' order.id %}
-If you need anything, dont forget to email us at admin@admin.com
+
+Thanks
 {% endautoescape %} 

@@ -2,8 +2,12 @@
 
 {% autoescape off %}
 Hello Admin,
-There is a recent purchase from our store.
-Please visit the link below for order details.
+There is a recent purchase from our store with the details below.
+Transaction ID: {{transaction_id}}
+Number of items: {{number_of_items}}
+Total Cost: ₦{{total_order_cost}}
+Shipping Address: {{shipping_address}}
+Please visit the link below for more information on the order.
 http://{{ domain }}{% url 'order' order.id %}
 Thanks.
 

@@ -68,28 +68,31 @@
         
         <div class="col-md-12">
             <h5>Here is your detailed Order information:</h5>
-            <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Transaction ID</th>
-                    <th scope="col">Date Ordered</th>
-                    <th scope="col">Total Amount</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {% for order in orders %}
-                        {% if order.complete %}
-                            <tr>
-                                <th scope="row"><a href=" {% url 'order' order.id %} ">{{order.transaction_id}}</a>  </th>
-                                <td> {{order.date_ordered}} </td>
-                                <td> ₦{{order.get_cart_total}} </td>
-                                <td> {{order.status}} </td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Transaction ID</th>
+                        <th scope="col">Date Ordered</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                            {% if order.complete %}
+                                <tr>
+                                    <th scope="row"><a href=" {% url 'order' order.id %} ">{{order.transaction_id}}</a>  </th>
+                                    <td> {{order.date_ordered}} </td>
+                                    <td> ₦{{order.get_cart_total}} </td>
+                                    <td> {{order.status}} </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
 
     </div>

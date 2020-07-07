@@ -1,6 +1,6 @@
 {% autoescape off %}
-Hi {{ user.username }},
-Please click on the link to confirm your registration,
+Hi {{ user.first_name }},
+Please click on the link to confirm your registration. You can copy to your browser if it is not clickable.
 
 http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
 {% endautoescape %} 

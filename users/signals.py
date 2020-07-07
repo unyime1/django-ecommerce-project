@@ -56,12 +56,21 @@ def order_confirmation_email(sender, instance, **kwargs):
             'order':order,
             'domain': current_site,
             'customer_name':customer_name,
+            'number_of_items':number_of_items,
+            'total_order_cost':total_order_cost,
+            'order_status':order_status,
+            'shipping_address':shipping_address,
+            'transaction_id':transaction_id
         })
 
     admin_message = render_to_string('users/admin_order_email.html', {
             'customer': customer,
             'order':order,
             'domain': current_site,
+            'number_of_items':number_of_items,
+            'total_order_cost':total_order_cost,
+            'shipping_address':shipping_address,
+            'transaction_id':transaction_id
         })
 
     unauthenticated_customer_message = render_to_string('users/unauthenticated_order__order_confirmation_email.html', {

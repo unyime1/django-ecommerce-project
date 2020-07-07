@@ -28,31 +28,42 @@
 
             <br>
             <div class="box-element">
-                <div class="cart-row">
-                    <div style="flex:2"></div>
-                    <div style="flex:2"><strong>Item</strong></div>
-                    <div style="flex:1"><strong>Price</strong></div>
-                    <div style="flex:1"><strong>Quantity</strong></div>
-                    <div style="flex:1"><strong>Total</strong></div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Item</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items %}
+                                
+                                <tr>
+                                    <th scope="row"><img class="row-image" src="{{item.product.imageURL}}"> </th>
+                                    <td><p>{{item.product.name}} </p></td>
+                                    <td> <p>₦{{item.product.price|floatformat:2}}</p></td>
+                                    <td>
+                                        <p class="quantity">{{item.quantity}}</p>
+                                        <div class="quantity">
+                                            <img data-product={{item.product.id}} data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+                                    
+                                            <img data-product={{item.product.id}} data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+                                        </div>
+                                    </td>
+                                    <td><p>₦{{item.get_total_cost}}</p></td>
+                                </tr>
+                                
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
                 
-                {% for item in items %}
-                    <div class="cart-row">
-                        <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
-                        <div style="flex:2"><p>{{item.product.name}}</p></div>
-                        <div style="flex:1"><p>₦{{item.product.price|floatformat:2}}</p></div>
-                        <div style="flex:1">
-                            <p class="quantity">{{item.quantity}}</p>
-                            <div class="quantity">
-                                <img data-product={{item.product.id}} data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
-                        
-                                <img data-product={{item.product.id}} data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
-                            </div>
-                        </div>
-                        <div style="flex:1"><p>₦{{item.get_total_cost}}</p></div>
-                    </div>
-                {% endfor %}
-
+                
             </div>
         </div>
     </div>
