@@ -61,15 +61,12 @@
   </head>
   <body>
     {% include 'stores/navbar.html' %}
-    
+  
     <div id="body">
-      {% if messages %}
-        {% for message in messages%}
-          {{message}}
-        {% endfor %}
-      {% endif %}
-
+      {% include 'stores/messages.html' %}
+      
       {% block content %}
+        
 
       {% endblock content %}
     </div>

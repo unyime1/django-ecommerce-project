@@ -1478,3 +1478,7 @@ header {
 .asteriskField{
   display: none;
 }
+
+#messages{
+  margin-top: 20px;
+}

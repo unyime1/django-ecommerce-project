@@ -4,6 +4,7 @@ import json
 import datetime
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.contrib import messages 
 
 # Create your views here.
 from .models import *
@@ -58,8 +59,7 @@ def store(request):
 
     #get cart items from order model property
     cart_quantity = order.get_cart_quantity 
-
-
+    
     context = {'products': products, 'cart_quantity':cart_quantity}
     return render(request, 'stores/store.html', context)
 
