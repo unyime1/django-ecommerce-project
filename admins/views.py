@@ -32,7 +32,9 @@ def adminPanel(request):
     #get cart items from order model property
     cart_quantity = order.get_cart_quantity
 
+    # queries for pending order table
+    orders = Order.objects.filter(status='Processing')
 
-    context = {'cart_quantity': cart_quantity, }
+    context = {'cart_quantity': cart_quantity, 'orders':orders}
 
     return render(request, 'admins/admin_panel.html', context)
