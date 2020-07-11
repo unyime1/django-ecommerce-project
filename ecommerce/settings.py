@@ -53,8 +53,9 @@ INSTALLED_APPS = [
     #my apps
     'stores.apps.StoresConfig',
     'users.apps.UsersConfig',
+    'admins.apps.AdminsConfig',
 
-     #installed app
+    #installed app
     'django_filters',
     'storages',
     'crispy_forms',
