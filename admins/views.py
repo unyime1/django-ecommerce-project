@@ -33,7 +33,7 @@ def adminPanel(request):
     cart_quantity = order.get_cart_quantity
 
     # queries for pending order table
-    orders = Order.objects.filter(status='Processing')
+    orders = Order.objects.filter(status='Processing').order_by('-date_ordered')
 
     context = {'cart_quantity': cart_quantity, 'orders':orders}
 

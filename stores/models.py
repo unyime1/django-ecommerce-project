@@ -8,6 +8,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField()
     digital = models.BooleanField(default=False, null=True, blank=True)
+    date_added = models.DateTimeField(auto_now_add=True, null=True)
     image = models.ImageField(default='placeholder.png', null=True, blank=True, upload_to='images/')
 
     def __str__(self):

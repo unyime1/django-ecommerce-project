@@ -40,7 +40,7 @@ def home(request):
 def store(request):
     """this function handles the store view"""
 
-    products = Product.objects.all()
+    products = Product.objects.all().order_by('-date_added')
 
     if request.user.is_authenticated:
         customer = request.user.customer

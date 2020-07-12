@@ -163,7 +163,7 @@ def userProfile(request):
 
     #database queries
     customer = request.user.customer
-    orders = request.user.customer.order_set.all().filter(complete='True')
+    orders = request.user.customer.order_set.all().filter(complete='True').order_by('-date_ordered')
     total_orders = orders.count()
     delivered = orders.filter(status='Delivered').count()
     processing = orders.filter(status='Processing').count()
