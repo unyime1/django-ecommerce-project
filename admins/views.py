@@ -40,7 +40,7 @@ def adminPanel(request):
     #registered users
     registered_users = User.objects.all()
     registered_users_count = registered_users.count()
-   
+    #user_orders = registered_users.customer.order_set.all(complete=True)
 
     for user in registered_users:
         user_first_name = user.first_name
@@ -48,12 +48,15 @@ def adminPanel(request):
         user_email = user.email
         user_username = user.username
         user_phone = user.customer.phonenumber
-       
+        order_count = user.customer.order_set.filter(complete=True).count()
 
+    
+    
+    
     context = {'cart_quantity': cart_quantity, 'orders_pending':orders_pending, 'orders_pending_count':orders_pending_count,
         'registered_users':registered_users, 'registered_users_count':registered_users_count, 'user_first_name':user_first_name,
         'user_last_name':user_last_name, 'user_email':user_email, 'user_phone':user_phone, 'user_username':user_username,
-       
+        'order_count':order_count,
         }
 
     return render(request, 'admins/admin_panel.html', context)
