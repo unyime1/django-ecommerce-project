@@ -3,6 +3,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib import messages 
+from django.contrib.auth.models import User
 
 from stores.models import *
 from stores.utils import *
@@ -33,8 +34,26 @@ def adminPanel(request):
     cart_quantity = order.get_cart_quantity
 
     # queries for pending order table
-    orders = Order.objects.filter(status='Processing').order_by('-date_ordered')
+    orders_pending = Order.objects.filter(status='Processing', complete=True).order_by('-date_ordered')
+    orders_pending_count = orders_pending.count()
 
-    context = {'cart_quantity': cart_quantity, 'orders':orders}
+    #registered users
+    registered_users = User.objects.all()
+    registered_users_count = registered_users.count()
+   
+
+    for user in registered_users:
+        user_first_name = user.first_name
+        user_last_name = user.last_name
+        user_email = user.email
+        user_username = user.username
+        user_phone = user.customer.phonenumber
+       
+
+    context = {'cart_quantity': cart_quantity, 'orders_pending':orders_pending, 'orders_pending_count':orders_pending_count,
+        'registered_users':registered_users, 'registered_users_count':registered_users_count, 'user_first_name':user_first_name,
+        'user_last_name':user_last_name, 'user_email':user_email, 'user_phone':user_phone, 'user_username':user_username,
+       
+        }
 
     return render(request, 'admins/admin_panel.html', context)

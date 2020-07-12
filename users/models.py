@@ -14,7 +14,7 @@ class Customer(models.Model):
     phonenumber = models.CharField(max_length=200, null=True)
     device = models.CharField(max_length=200, null=True, blank=True)
 
-    def __str__(self):
+    def __str__(self): 
         if self.username:
             name = self.username
         else:

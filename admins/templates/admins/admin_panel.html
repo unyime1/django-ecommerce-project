@@ -140,6 +140,8 @@
       </div>
       
       
+
+    
       <hr>
       <h2>Products</h2>
 
@@ -160,7 +162,7 @@
                 </tr>
               </thead>
               <tbody>
-                  {% for order in orders %}
+                  {% for order in orders_pending %}
                       {% if order.complete %}
                           <tr>
                             <th scope="row"><a href=" {% url 'order' order.id %} ">{{order.transaction_id}}</a>  </th>
@@ -257,7 +259,7 @@
       </div>
 
       <hr>
-      <h2>Orders Pending</h2>
+      <h2>Orders Pending ({{orders_pending_count}})</h2>
       <div class="row">
         <div class="col-md-12">
 
@@ -273,16 +275,16 @@
                 </tr>
               </thead>
               <tbody>
-                  {% for order in orders %}
-                      {% if order.complete %}
-                          <tr>
-                            <th scope="row"><a href=" {% url 'order' order.id %} ">{{order.transaction_id}}</a>  </th>
-                            <td> {{order.date_ordered}} </td>
-                            <td> ₦{{order.get_cart_total}} </td>
-                            <td> {{order.status}} </td>
-                            <td><button type="button" class="btn btn-info btn-sm">Update Status</button></td>
-                          </tr>
-                      {% endif %}
+                  {% for order in orders_pending %}
+                      
+                    <tr>
+                      <th scope="row"><a href=" {% url 'order' order.id %} ">{{order.transaction_id}}</a>  </th>
+                      <td> {{order.date_ordered}} </td>
+                      <td> ₦{{order.get_cart_total}} </td>
+                      <td> {{order.status}} </td>
+                      <td><button type="button" class="btn btn-info btn-sm">Update Status</button></td>
+                    </tr>
+                     
                   {% endfor %}
               </tbody>
             </table>
@@ -293,7 +295,44 @@
 
 
       <hr>
-      <h2>Registered Users</h2>
+      <h2>Registered Users ({{registered_users_count}})</h2>
+
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Total Purchases</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                 
+                      
+                <tr>
+                  <th scope="row">{{user_first_name}} </th>
+                  <td>{{user_last_name}} </td>
+                  <td> {{user_username}} </td>
+                  <td> {{user_email}} </td>
+                  <td> {{user_phone}} </td>
+                  <td>  </td>
+                  <td><button type="button" class="btn btn-info btn-sm">View Profile</button></td>
+                </tr>
+                     
+                 
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
 
     </main>
   </div>
