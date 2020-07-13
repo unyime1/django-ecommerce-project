@@ -26,17 +26,19 @@ class Product(models.Model):
     @property
     def get_product_count(self):
         """this property counts the total amount of purchases per product"""
+        #pull all the cart items of products
         order_item = self.orderitem_set.all()
+        #initialize empty array
+        total = []
+        #loop through products
         for orders in order_item:
+            #check if the order was completed
             if orders.order.complete:
-                return orders.quantity
-        """
-        for product in product_count:
-            if product.order.complete:
-                #loop through the orderitems list and sum their total costs
-                total = sum([item.get_total_cost for item in product])
-        return product_count
-        """
+                #add the items in completed orders to array
+                total.append(orders.quantity)
+        #return a sum of the array
+        return sum(total)
+
 
 
 class Order(models.Model):
