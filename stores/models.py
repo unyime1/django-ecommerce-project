@@ -23,6 +23,20 @@ class Product(models.Model):
             url = ''
         return url
 
+    @property
+    def get_product_count(self):
+        """this property counts the total amount of purchases per product"""
+        order_item = self.orderitem_set.all()
+        for orders in order_item:
+            if orders.order.complete:
+                return orders.quantity
+        """
+        for product in product_count:
+            if product.order.complete:
+                #loop through the orderitems list and sum their total costs
+                total = sum([item.get_total_cost for item in product])
+        return product_count
+        """
 
 
 class Order(models.Model):
@@ -94,7 +108,8 @@ class OrderItem(models.Model):
         total = self.product.price * self.quantity
         return total
 
-
+    
+        
 
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)

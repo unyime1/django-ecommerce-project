@@ -51,7 +51,9 @@ def adminPanel(request):
     total_orders_delivered = total_orders.filter(status='Delivered').count()
      
     #products
-    products = Product.objects.all()
+    products = Product.objects.all() 
+     
+    
     
     context = {'cart_quantity': cart_quantity, 'orders_pending':orders_pending, 'orders_pending_count':orders_pending_count,
         'registered_users':registered_users, 'registered_users_count':registered_users_count,
