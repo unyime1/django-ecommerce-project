@@ -33,30 +33,31 @@ def adminPanel(request):
     #get cart items from order model property
     cart_quantity = order.get_cart_quantity
 
-    # queries for pending order table
-    orders_pending = Order.objects.filter(status='Processing', complete=True).order_by('-date_ordered')
+    #GENERAL QUERIES
+    total_orders = Order.objects.filter(complete=True)
+
+    # pending orders
+    orders_pending = total_orders.filter(status='Processing').order_by('-date_ordered')
     orders_pending_count = orders_pending.count()
 
     #registered users
     registered_users = User.objects.all()
     registered_users_count = registered_users.count()
-    #user_orders = registered_users.customer.order_set.all(complete=True)
-
-    for user in registered_users:
-        user_first_name = user.first_name
-        user_last_name = user.last_name
-        user_email = user.email
-        user_username = user.username
-        user_phone = user.customer.phonenumber
-        order_count = user.customer.order_set.filter(complete=True).count()
-
     
-    
+    #order statistics
+    total_orders_count = total_orders.count()
+    total_orders_pending = total_orders.filter(status='Processing').count()
+    total_orders_shipped = total_orders.filter(status='Shipped').count()
+    total_orders_delivered = total_orders.filter(status='Delivered').count()
+     
+    #products
+    products = Product.objects.all()
     
     context = {'cart_quantity': cart_quantity, 'orders_pending':orders_pending, 'orders_pending_count':orders_pending_count,
-        'registered_users':registered_users, 'registered_users_count':registered_users_count, 'user_first_name':user_first_name,
-        'user_last_name':user_last_name, 'user_email':user_email, 'user_phone':user_phone, 'user_username':user_username,
-        'order_count':order_count,
+        'registered_users':registered_users, 'registered_users_count':registered_users_count,
+        'total_orders_count':total_orders_count, 'total_orders_pending':total_orders_pending, 
+        'total_orders_shipped':total_orders_shipped, 'total_orders_delivered':total_orders_delivered, 'products':products,
+       
         }
 
     return render(request, 'admins/admin_panel.html', context)

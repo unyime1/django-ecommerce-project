@@ -162,19 +162,19 @@
                 </tr>
               </thead>
               <tbody>
-                  {% for order in orders_pending %}
-                      {% if order.complete %}
-                          <tr>
-                            <th scope="row"><a href=" {% url 'order' order.id %} ">{{order.transaction_id}}</a>  </th>
-                            <td> {{order.date_ordered}} </td>
-                            <td> ₦{{order.get_cart_total}} </td>
-                            <td> {{order.status}} </td>
-                            <td> {{order.status}} </td>
-                            <td><button type="button" class="btn btn-info btn-sm">Update</button></td>
-                            <td><button type="button" class="btn btn-danger btn-sm">Delete</button></td>
-                          </tr>
-                      {% endif %}
-                  {% endfor %}
+                {% for product in products %}
+                <tr>
+                  <td scope="row"><img class="row-image" src="{{product.imageURL}}"> </td>
+                  <td> {{product.name}} </td>
+                  <td> ₦{{product.price}} </td>
+                  <td> {{product.date_added}} </td>
+                  <td>  </td>
+                  <td><button type="button" class="btn btn-info btn-sm">Update</button></td>
+                  <td><button type="button" class="btn btn-danger btn-sm">Delete</button></td>
+                </tr>
+                {% endfor %}
+                          
+                    
               </tbody>
             </table>
           </div>
@@ -199,7 +199,7 @@
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                   <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Orders Pending</div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">{{total_orders_pending}}</div>
                 </div>
                 <div class="col-auto">
                   <i class="fa fa-cog fa-spin fa-2x text-gray-300"></i>
@@ -215,7 +215,7 @@
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                   <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Orders Shipped</div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">{{total_orders_shipped}}</div>
                 </div>
                 <div class="col-auto">
                   <i class="fa fa-truck fa-2x text-gray-300"></i>
@@ -231,7 +231,7 @@
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                   <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Orders Delivered</div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">{{total_orders_delivered}}</div>
                 </div>
                 <div class="col-auto">
                   <i class="fa fa-check  fa-2x text-gray-300"></i>
@@ -247,7 +247,7 @@
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                   <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Orders</div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">{{total_orders_count}}</div>
                 </div>
                 <div class="col-auto">
                   <i class="fa fa-shopping-cart fa-2x text-gray-300"></i>
@@ -314,18 +314,21 @@
                 </tr>
               </thead>
               <tbody>
-                 
-                      
-                <tr>
-                  <th scope="row">{{user_first_name}} </th>
-                  <td>{{user_last_name}} </td>
-                  <td> {{user_username}} </td>
-                  <td> {{user_email}} </td>
-                  <td> {{user_phone}} </td>
-                  <td> {{order_count}} </td>
-                  
-                </tr>
+               
+                {% for user in  registered_users %}
+                  <tr>
+                   
+                    <th scope="row">{{user.first_name}} </th>
+                    <td>{{user.last_name}} </td>
+                    <td> {{user.username}} </td>
+                    <td> {{user.email}} </td>
+                    <td> {{user.customer.phone}} </td>
                      
+                    <td> {{user.customer.get_complete_order}} </td>
+                    
+                  </tr> 
+
+                {% endfor %} 
                  
               </tbody>
             </table>

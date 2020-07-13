@@ -109,3 +109,7 @@ th {
 td { 
   text-align: center 
 }
+
+.row-image{
+	width: 100px;
+}

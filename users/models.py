@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import stores.models
 
 # Create your models here.
 
@@ -24,4 +25,7 @@ class Customer(models.Model):
                 name = self.device
         return str(name)
 
- 
+    @property
+    def get_complete_order(self):
+        """this property returns the number of completed orders per user"""
+        return self.order_set.filter(complete=True).count()
