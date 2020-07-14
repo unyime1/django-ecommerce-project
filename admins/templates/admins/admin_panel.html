@@ -41,7 +41,7 @@
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Orders Today</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{orders_day}}</div>
                   </div>
                   <div class="col-auto">
                     <i class="fa fa-calendar fa-2x text-gray-300"></i>
@@ -58,7 +58,7 @@
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Orders This Week</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{orders_week}}</div>
                   </div>
                   <div class="col-auto">
                     <i class="fa fa-calendar-plus-o fa-2x text-gray-300"></i>
@@ -75,7 +75,7 @@
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                   <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Orders this Month</div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">{{orders_month}}</div>
                 </div>
                 <div class="col-auto">
                   <i class="fa fa-calendar-o fa-2x text-gray-300"></i>
@@ -337,6 +337,9 @@
 
         </div>
       </div>
+
+
+      <hr>
 
     </main>
   </div>

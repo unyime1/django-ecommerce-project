@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib import messages 
 from django.contrib.auth.models import User
+from datetime import datetime, timedelta
 
 from stores.models import *
 from stores.utils import *
@@ -36,6 +37,18 @@ def adminPanel(request):
     #GENERAL QUERIES
     total_orders = Order.objects.filter(complete=True)
 
+    #quick stats
+    #filter the orders within 7 days
+    orders_day = total_orders.filter(date_ordered__gte=datetime.now()+timedelta(days=-1)).count()
+
+    #filter the orders within 7 days
+    orders_week = total_orders.filter(date_ordered__gte=datetime.now()+timedelta(days=-7)).count()
+
+    #filter the orders within 7 days
+    orders_month = total_orders.filter(date_ordered__gte=datetime.now()+timedelta(days=-30)).count()
+    
+    print(orders_day, orders_week, orders_month)
+
     # pending orders
     orders_pending = total_orders.filter(status='Processing').order_by('-date_ordered')
     orders_pending_count = orders_pending.count()
@@ -59,7 +72,7 @@ def adminPanel(request):
         'registered_users':registered_users, 'registered_users_count':registered_users_count,
         'total_orders_count':total_orders_count, 'total_orders_pending':total_orders_pending, 
         'total_orders_shipped':total_orders_shipped, 'total_orders_delivered':total_orders_delivered, 'products':products,
-       
+        'orders_day':orders_day, 'orders_week':orders_day, 'orders_month':orders_month,
         }
 
     return render(request, 'admins/admin_panel.html', context)

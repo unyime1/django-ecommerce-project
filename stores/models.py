@@ -93,6 +93,8 @@ class Order(models.Model):
         #return the total cost
         return total
 
+    
+
 
 class OrderItem(models.Model):
     """this model handles the datails of a particular item to be purchased"""
