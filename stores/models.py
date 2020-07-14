@@ -34,7 +34,7 @@ class Product(models.Model):
         for orders in order_item:
             #check if the order was completed
             if orders.order.complete:
-                #add the items in completed orders to array
+                #add the items quantity in completed orders to array
                 total.append(orders.quantity)
         #return a sum of the array
         return sum(total)
@@ -103,7 +103,7 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return self.product.name
-
+ 
     @property
     def get_total_cost(self):
         """this function computes the total cost of a particular item to be purchased"""

@@ -310,6 +310,7 @@
                   <th scope="col">Email</th>
                   <th scope="col">Phone Number</th>
                   <th scope="col">Total Purchases</th>
+                  <th scope="col">Total Amount Spent</th>
                   
                 </tr>
               </thead>
@@ -323,8 +324,8 @@
                     <td> {{user.username}} </td>
                     <td> {{user.email}} </td>
                     <td> {{user.customer.phone}} </td>
-                     
                     <td> {{user.customer.get_complete_order}} </td>
+                    <td> ₦{{user.customer.get_amount_spent}} </td>
                     
                   </tr> 
 

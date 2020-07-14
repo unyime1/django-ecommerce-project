@@ -29,3 +29,23 @@ class Customer(models.Model):
     def get_complete_order(self):
         """this property returns the number of completed orders per user"""
         return self.order_set.filter(complete=True).count()
+
+    @property
+    def get_amount_spent(self):
+        """this property calculates the total spending per customer"""
+        #pull all the cart items of products
+        orders = self.order_set.all()
+        #initialize empty array
+        total_price = []
+        #loop through all orders
+        for order in orders:
+            #filter complete orders
+            if order.complete:
+                #get the order items for complete orders
+                order_items = order.orderitem_set.all() 
+                #loop through products
+                for item in order_items:
+                    #add the items price to the array
+                    total_price.append(item.product.price)
+        #return a sum of the array
+        return sum(total_price)
