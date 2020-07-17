@@ -72,7 +72,7 @@ def adminPanel(request):
         'registered_users':registered_users, 'registered_users_count':registered_users_count,
         'total_orders_count':total_orders_count, 'total_orders_pending':total_orders_pending, 
         'total_orders_shipped':total_orders_shipped, 'total_orders_delivered':total_orders_delivered, 'products':products,
-        'orders_day':orders_day, 'orders_week':orders_day, 'orders_month':orders_month,
+        'orders_day':orders_day, 'orders_week':orders_week, 'orders_month':orders_month,
         }
 
     return render(request, 'admins/admin_panel.html', context)
