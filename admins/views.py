@@ -94,8 +94,25 @@ def updateOrderStatus(request, order_id):
             order.status = status
             order.save()
             return redirect('/panel') 
+            messages.success('Order status was updated')
     else:
         form = updateOrderStatusForm() 
 
     context = {'form':form,}
     return render(request, 'admins/update_order_status.html', context)
+
+
+def fullOrderPage(request):
+    """this view handles the full order page""" 
+
+     #GENERAL QUERIES
+    total_orders = Order.objects.filter(complete=True).order_by('-date_ordered')
+    total_orders_count = total_orders.count()
+
+    context = {
+        'total_orders':total_orders, 'total_orders_count':total_orders_count, 
+        
+    
+    }
+    return render(request, 'admins/full_orders.html', context)
+
