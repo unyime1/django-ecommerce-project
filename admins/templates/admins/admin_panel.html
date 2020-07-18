@@ -286,7 +286,7 @@
                       <td> {{order.date_ordered}} </td>
                       <td> ₦{{order.get_cart_total}} </td>
                       <td> {{order.status}} </td>
-                      <td><button type="button" class="btn btn-info btn-sm">Update Status</button></td>
+                      <td><a href="{% url 'update_status' order.id %}"><button type="button" class="btn btn-info btn-sm">Update Status</button></a></td>
                     </tr>
                      
                   {% endfor %}

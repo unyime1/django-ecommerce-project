@@ -5,9 +5,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages 
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
+from django.utils.timezone import make_aware
 
 from stores.models import *
 from stores.utils import *
+from .forms import updateOrderStatusForm
 
 # Create your views here.
 
@@ -47,7 +49,7 @@ def adminPanel(request):
     #filter the orders within 7 days
     orders_month = total_orders.filter(date_ordered__gte=datetime.now()+timedelta(days=-30)).count()
     
-    print(orders_day, orders_week, orders_month)
+  
 
     # pending orders
     orders_pending = total_orders.filter(status='Processing').order_by('-date_ordered')
@@ -76,3 +78,24 @@ def adminPanel(request):
         }
 
     return render(request, 'admins/admin_panel.html', context)
+
+
+def updateOrderStatus(request, order_id):
+    """this view handles order status updates"""
+
+    order = Order.objects.get(id=order_id) 
+    form = updateOrderStatusForm()
+
+    if request.method == 'POST':
+        form = updateOrderStatusForm(request.POST) 
+
+        if form.is_valid():
+            status = form.cleaned_data['status']
+            order.status = status
+            order.save()
+            return redirect('/panel') 
+    else:
+        form = updateOrderStatusForm() 
+
+    context = {'form':form,}
+    return render(request, 'admins/update_order_status.html', context)
