@@ -9,7 +9,7 @@ from django.utils.timezone import make_aware
 
 from stores.models import *
 from stores.utils import *
-from .forms import updateOrderStatusForm
+from .forms import *
 
 # Create your views here.
 
@@ -67,6 +67,7 @@ def adminPanel(request):
      
     #products
     products = Product.objects.all() 
+    products_count = products.count()
      
     
     
@@ -74,7 +75,7 @@ def adminPanel(request):
         'registered_users':registered_users, 'registered_users_count':registered_users_count,
         'total_orders_count':total_orders_count, 'total_orders_pending':total_orders_pending, 
         'total_orders_shipped':total_orders_shipped, 'total_orders_delivered':total_orders_delivered, 'products':products,
-        'orders_day':orders_day, 'orders_week':orders_week, 'orders_month':orders_month,
+        'orders_day':orders_day, 'orders_week':orders_week, 'orders_month':orders_month, 'products_count':products_count,
         }
 
     return render(request, 'admins/admin_panel.html', context)
@@ -116,3 +117,12 @@ def fullOrderPage(request):
     }
     return render(request, 'admins/full_orders.html', context)
 
+
+
+def addProducts(request):
+    """this view handles the addition of products""" 
+
+    form = ProductForm()
+
+    context = {'form':form,}
+    return render(request, 'admins/add_products.html', context)

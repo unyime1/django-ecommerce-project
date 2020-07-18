@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from users.models import Customer
 
-class RegistrationForm(UserCreationForm):
+class RegistrationForm(UserCreationForm): 
     """this class handles the user registration form"""
     first_name = forms.CharField(max_length=30, required=True, label='First Name', widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
     last_name = forms.CharField(max_length=30, required=True, label='Last Name', widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))

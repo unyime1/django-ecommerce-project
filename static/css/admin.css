@@ -113,3 +113,7 @@ td {
 .row-image{
 	width: 100px;
 }
+
+.asteriskField{
+  display: none;
+}
