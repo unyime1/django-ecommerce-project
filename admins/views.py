@@ -85,10 +85,10 @@ def updateOrderStatus(request, order_id):
     """this view handles order status updates"""
 
     order = Order.objects.get(id=order_id) 
-    form = updateOrderStatusForm()
+    form = updateOrderStatusForm(instance=order)
 
     if request.method == 'POST':
-        form = updateOrderStatusForm(request.POST) 
+        form = updateOrderStatusForm(request.POST, instance=order) 
 
         if form.is_valid():
             status = form.cleaned_data['status']
@@ -97,9 +97,9 @@ def updateOrderStatus(request, order_id):
             return redirect('/panel') 
             messages.success('Order status was updated')
     else:
-        form = updateOrderStatusForm() 
+        form = updateOrderStatusForm(instance=order) 
 
-    context = {'form':form,}
+    context = {'form':form, 'order':order,} 
     return render(request, 'admins/update_order_status.html', context)
 
 

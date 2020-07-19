@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from stores.models import Product
+from stores.models import Product, Order
 
 
 STATUS = (
@@ -15,8 +15,12 @@ DIGITAL = (
 )
 
 
-class updateOrderStatusForm(forms.Form):
+class updateOrderStatusForm(ModelForm):
     status = forms.ChoiceField(choices=STATUS)
+
+    class Meta:
+        model = Order
+        fields = ['status']
 
 
 
