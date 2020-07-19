@@ -66,7 +66,7 @@ def adminPanel(request):
     total_orders_delivered = total_orders.filter(status='Delivered').count()
      
     #products
-    products = Product.objects.all() 
+    products = Product.objects.all().order_by('-date_added')
     products_count = products.count()
      
     
@@ -123,6 +123,15 @@ def addProducts(request):
     """this view handles the addition of products""" 
 
     form = ProductForm()
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('panel')
+            messages.success(request, 'Your product was saved')
+    else:
+        form = ProductForm()
 
     context = {'form':form,}
     return render(request, 'admins/add_products.html', context)

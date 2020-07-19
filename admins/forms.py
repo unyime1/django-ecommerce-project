@@ -22,11 +22,10 @@ class updateOrderStatusForm(forms.Form):
 
 class ProductForm(ModelForm):
     """this class handles the product addition form"""
-    name = forms.CharField(max_length=30, required=True, label='Product Name',
-            widget=forms.TextInput(attrs={'placeholder': 'Product Name'}))
-    price = forms.NumberInput()
-    image = forms.ImageField(required=True)
-    digital = forms.BooleanField(required=True)
+    name = forms.CharField(max_length=30, required=True, label='Name',
+            widget=forms.TextInput(attrs={'placeholder': ''}))
+    price = forms.NumberInput(attrs={'placeholder': 'Price', 'required':True, 'type':'number'})
+   
 
     class Meta:
         model = Product
