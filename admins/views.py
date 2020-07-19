@@ -135,3 +135,30 @@ def addProducts(request):
 
     context = {'form':form,}
     return render(request, 'admins/add_products.html', context)
+
+
+
+def deleteProduct(request, product_id):
+    """this function handles the delete of products"""
+    product = Product.objects.get(id=product_id) 
+    product.delete()
+    return redirect('panel')
+
+
+def updateProduct(request, product_id):
+    """this function handles the update of products"""
+    product = Product.objects.get(id=product_id) 
+    form = ProductForm(instance=product)
+    
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('panel')
+    else:
+        form = ProductForm(instance=product)
+    
+    context = {'form':form,}
+    return render(request, 'admins/add_products.html', context)
+    
+    
