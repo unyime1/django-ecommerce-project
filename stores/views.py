@@ -262,3 +262,28 @@ def orderDetailsPage(request, order_id):
     context = {'order':order, 'shipping_information':shipping_information,
         'product_information':product_information, 'cart_quantity':cart_quantity,}
     return render(request, 'stores/order_page.html', context)
+
+
+@ensure_csrf_cookie
+def productPage(request, product_id):
+    """this function handles the product page"""
+
+    product = Product.objects.get(id=product_id)
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+
+    else:
+        #get the guest user logic from utils.py module
+        customer = guestUser(request)
+
+
+    #get customer's uncompleted orders(open cart). If none, create the order.
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+
+
+    #get cart items from order model property
+    cart_quantity = order.get_cart_quantity 
+    
+    context = {'product': product, 'cart_quantity':cart_quantity}
+    return render(request, 'stores/product_page.html', context)
