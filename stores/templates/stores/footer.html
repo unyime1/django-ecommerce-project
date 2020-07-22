@@ -38,37 +38,40 @@
  <footer class="footer_part">
     <div class="container">
         <div class="row justify-content-between">
-            <div class="col-sm-6 col-lg-2">
-                <div class="single_footer_part">
-                    <h4>Category</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Male</a></li>
-                        <li><a href="#">Female</a></li>
-                        <li><a href="#">Shoes</a></li>
-                        <li><a href="#">Fashion</a></li>
-                    </ul>
+            <div class="centralize">
+                <div class="col-sm-6 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>Category</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Male</a></li>
+                            <li><a href="#">Female</a></li>
+                            <li><a href="#">Shoes</a></li>
+                            <li><a href="#">Fashion</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>Company</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="single_footer_part">
+                        <h4>Address</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">66 Itiam Street, Uyo</a></li>
+                            <li><a href="#">+234 0494 595 8 </a></li>
+                            <li><a href="#">contact@dom.com </a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-2">
-                <div class="single_footer_part">
-                    <h4>Company</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="{% url 'contact' %}">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="single_footer_part">
-                    <h4>Address</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="#">66 Itiam Street, Uyo</a></li>
-                        <li><a href="#">+234 0494 595 8 </a></li>
-                        <li><a href="#">contact@dom.com </a></li>
-                    </ul>
-                </div>
-            </div>
+            
             <div class="col-sm-6 col-lg-4">
                 <div class="single_footer_part">
                     <h4>Newsletter</h4>
@@ -85,7 +88,7 @@
                         </form>
                     </div>
                     
-                    <div class="social_icon">
+                    <div class="social_icon centralize">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
                         <a href="#"><i class="fa fa-instagram"></i></a>

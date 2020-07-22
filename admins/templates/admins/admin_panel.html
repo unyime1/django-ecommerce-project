@@ -11,30 +11,13 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Dashboard</h1>
-        <!--
-            <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
-            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-            </button>
-            </div>
-        -->
           
       </div>
-
-
-      <!--
-          <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-      -->
       
       <h2>Quick Stats</h2>
       <div class="row" id="stats">
         
-        <!-- Earnings (Monthly) Card Example -->
+       
         <div class="col-md-4 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
               <div class="card-body">
@@ -51,7 +34,7 @@
             </div>
         </div>
 
-        <!-- Earnings (Monthly) Card Example -->
+      
         <div class="col-md-4 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
               <div class="card-body">
@@ -68,7 +51,6 @@
             </div>
         </div>
 
-          <!-- Earnings (Monthly) Card Example -->
         <div class="col-md-4 mb-4">
           <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
@@ -85,69 +67,13 @@
           </div>
         </div>
 
-          <!--
-
-        
-        <div class="col-md-4 mb-4">
-          <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-              <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings Today</div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                </div>
-                <div class="col-auto">
-                  <i class="fa fa-bitcoin fa-2x text-gray-300"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        
-        <div class="col-md-4 mb-4">
-          <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-              <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings This Week</div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                </div>
-                <div class="col-auto">
-                  <i class="fa fa-dollar fa-2x text-gray-300"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-     
-    
-        <div class="col-md-4 mb-4">
-          <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-              <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings This Month</div>
-                  <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                </div>
-                <div class="col-auto">
-                  <i class="fa fa-euro  fa-2x text-gray-300"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        -->
-
-
       </div>
       
       
 
     
       <hr>
-      <h2>Products ({{products_count}})</h2>
+      <h2 id="products">Products ({{products_count}})</h2>
 
       <div class="row">
         <div class="col-md-12">
@@ -194,9 +120,9 @@
       </div>
 
       <hr>
-      <h2>Order Statistics</h2>
+      <h2 id="order-stats">Order Statistics</h2>
       <div class="row">
-        <!-- Earnings (Monthly) Card Example -->
+       
         <div class="col-md-3 mb-4">
           <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
@@ -262,8 +188,9 @@
         </div>
       </div>
 
+
       <hr>
-      <h2>Orders Pending ({{orders_pending_count}})</h2>
+      <h2 id="pending-orders">Orders Pending ({{orders_pending_count}})</h2>
       <div class="row">
         <div class="col-md-12">
 
@@ -306,7 +233,7 @@
 
 
       <hr>
-      <h2>Registered Customers ({{registered_users_count}})</h2>
+      <h2 id="customers">Registered Customers ({{registered_users_count}})</h2>
 
       <div class="row">
         <div class="col-md-12">
@@ -330,8 +257,8 @@
                 {% for user in  registered_users %}
                   <tr>
                    
-                    <th scope="row">{{user.first_name}} </th>
-                    <td>{{user.last_name}} </td>
+                    <th scope="row">{{user.first_name|title}} </th>
+                    <td>{{user.last_name|title}} </td>
                     <td> {{user.username}} </td>
                     <td> {{user.email}} </td>
                     <td> {{user.customer.phone}} </td>

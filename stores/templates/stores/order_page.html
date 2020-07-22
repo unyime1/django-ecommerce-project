@@ -49,7 +49,7 @@
           <tr>
             <th scope="col">First Name</th>
             <th scope="col"></th>
-            <th scope="col">{{order.customer.first_name}}</th>
+            <th scope="col">{{order.customer.first_name|title}}</th>
             
           </tr>
         </thead>
@@ -57,7 +57,7 @@
           <tr>
             <th scope="row">Last Name</th>
             <td></td>
-            <td>{{order.customer.last_name}}</td>
+            <td>{{order.customer.last_name|title}}</td>
             
           </tr>
           <tr>
@@ -127,7 +127,7 @@
           <tr>
             <th scope="row">City</th>
             <td></td>
-            <td>{{shipping_information.city}}</td>
+            <td>{{shipping_information.city|title}}</td>
             
           </tr>
           <tr>
@@ -139,7 +139,7 @@
           <tr>
             <th scope="row">Country</th>
             <td></td>
-            <td> {{shipping_information.country}}</td>
+            <td> {{shipping_information.country|title}}</td>
             
           </tr>
         </tbody>
