@@ -7,6 +7,7 @@ class Product(models.Model):
     """this model handles the products in store"""
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField()
+    description = models.CharField(max_length=20000, null=True, blank=True)
     digital = models.BooleanField(default=False, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True, null=True)
     image = models.ImageField(default='placeholder.png', null=True, blank=True, upload_to='images/')

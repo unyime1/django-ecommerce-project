@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from stores.models import Product, Order
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
 STATUS = (
@@ -11,7 +12,7 @@ STATUS = (
 
 DIGITAL = (
     ('True', 'True'),
-    ('False', 'False'),
+    ('False', 'False'), 
 )
 
 
@@ -29,7 +30,7 @@ class ProductForm(ModelForm):
     name = forms.CharField(max_length=30, required=True, label='Name',
             widget=forms.TextInput(attrs={'placeholder': ''}))
     price = forms.NumberInput(attrs={'placeholder': 'Price', 'required':True, 'type':'number'})
-   
+    description = forms.CharField(widget=SummernoteWidget())
 
     class Meta:
         model = Product

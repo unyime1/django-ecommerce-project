@@ -59,13 +59,17 @@ INSTALLED_APPS = [
     'django_filters',
     'storages',
     'crispy_forms',
+    'django_summernote',
 
-    #enables addition od sites in db
+    #enables addition of sites in db
     'django.contrib.sites',
 ]
+
 SITE_ID = 1
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
