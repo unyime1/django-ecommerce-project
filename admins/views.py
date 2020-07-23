@@ -10,11 +10,13 @@ from django.utils.timezone import make_aware
 from stores.models import *
 from stores.utils import *
 from .forms import *
+from stores.decorators import *
 
 # Create your views here.
 
 
 @ensure_csrf_cookie
+@admin_only
 @login_required(login_url='login')
 def adminPanel(request):
     """this view handles the admin panel"""
@@ -81,6 +83,8 @@ def adminPanel(request):
     return render(request, 'admins/admin_panel.html', context)
 
 
+@admin_only
+@login_required(login_url='login')
 def updateOrderStatus(request, order_id):
     """this view handles order status updates"""
 
@@ -103,6 +107,8 @@ def updateOrderStatus(request, order_id):
     return render(request, 'admins/update_order_status.html', context)
 
 
+@admin_only
+@login_required(login_url='login')
 def fullOrderPage(request):
     """this view handles the full order page""" 
 
@@ -118,7 +124,8 @@ def fullOrderPage(request):
     return render(request, 'admins/full_orders.html', context)
 
 
-
+@admin_only
+@login_required(login_url='login')
 def addProducts(request):
     """this view handles the addition of products""" 
 
@@ -137,14 +144,17 @@ def addProducts(request):
     return render(request, 'admins/add_products.html', context)
 
 
-
+@admin_only
+@login_required(login_url='login')
 def deleteProduct(request, product_id):
     """this function handles the delete of products"""
     product = Product.objects.get(id=product_id) 
     product.delete()
     return redirect('panel')
+    
 
-
+@admin_only
+@login_required(login_url='login')
 def updateProduct(request, product_id):
     """this function handles the update of products"""
     product = Product.objects.get(id=product_id) 

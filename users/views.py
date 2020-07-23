@@ -42,7 +42,7 @@ def userRegistration(request):
         form = RegistrationForm(request.POST)
             #checks if form submission is valid
         if form.is_valid():
-            user = form.save(commit=False)
+            user = form.save(commit=False) 
             user.is_active = False
             user.save()
 
@@ -131,6 +131,7 @@ def userLogin(request):
     return render(request, 'users/login.html', context)
 
 
+@login_required(login_url='login')
 def userLogout(request):
     """this function handles the logout functionality"""
 

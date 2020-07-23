@@ -39,6 +39,6 @@ def admin_only(view_func):
             return view_func(request, *args, **kwargs) #return requested view if user is admin
 
         else:
-            return redirect('user_page') #else, redirect to userpage
+            return redirect('profile') #else, redirect to userpage
 
     return wrapper_func 

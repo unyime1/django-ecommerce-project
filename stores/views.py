@@ -147,8 +147,7 @@ def updateItem(request):
     productId = data['productId']
     action = data['action']
 
-    print('action:', action)
-    print('productId:', productId)
+    
     
     try:
         #query customer and product data
@@ -237,6 +236,7 @@ def processOrder(request):
 
 
 @ensure_csrf_cookie
+@admin_only
 @login_required(login_url='login')
 def orderDetailsPage(request, order_id):
     """This function renders the view that gives the detailed overview of individual orders"""
