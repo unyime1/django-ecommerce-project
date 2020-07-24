@@ -3,7 +3,7 @@
 {% block content %}
 {% include 'stores/breadcrumb.html' %} 
 <div class="container">
-    <div class="box-shadow-full">
+    <div class="box-shadow-full" >
         <div class="row">
             <div class="col-md-6">
                 <img src="{{product.imageURL}}" alt="Product" class="center">
@@ -11,7 +11,7 @@
             <div class="col-md-6">
                 <h2 class="center-text">{{product.name|title}}</h2>
                 <hr>
-                <h3>Price: ₦{{product.price}}</h3>
+                <h3 class="center-text">Price: ₦{{product.price}}</h3>
                 <hr>
                 <button data-product={{product.id}} data-action="add" class="btn btn-secondary btn-lg btn-block add-btn update-cart">Add to Cart</button>
                 <hr>
@@ -22,7 +22,7 @@
     </div>
     
     {% if product.description %}
-    <div class="box-shadow-full">
+    <div class="box-shadow-full" style="overflow: hidden; width: auto;">
         <div class="row">
             <div class="col-md-12">
                 <h3 class="center-text">Product Information</h3>
@@ -30,9 +30,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                
                 {{product.description|safe}}
-                
             </div>
         </div>
 

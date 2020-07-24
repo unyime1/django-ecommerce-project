@@ -42,13 +42,13 @@ def adminPanel(request):
     total_orders = Order.objects.filter(complete=True)
 
     #quick stats
-    #filter the orders within 7 days
+    #filter the orders within 1 day
     orders_day = total_orders.filter(date_ordered__gte=datetime.now()+timedelta(days=-1)).count()
 
     #filter the orders within 7 days
     orders_week = total_orders.filter(date_ordered__gte=datetime.now()+timedelta(days=-7)).count()
 
-    #filter the orders within 7 days
+    #filter the orders within 30 days
     orders_month = total_orders.filter(date_ordered__gte=datetime.now()+timedelta(days=-30)).count()
     
   

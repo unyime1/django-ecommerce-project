@@ -193,6 +193,9 @@ def processOrder(request):
     #get the customer data if the customer is logged in
     if request.user.is_authenticated:
         customer = request.user.customer
+        customer.phonenumber = data['form']['phonenumber']
+        customer.save() 
+        
     else:
         #get cookie named device
         device = request.COOKIES['device']
@@ -203,8 +206,9 @@ def processOrder(request):
         customer.last_name = data['form']['last_name']
         customer.email = data['form']['email']
         customer.phonenumber = data['form']['phonenumber']
-
-        customer.save()
+        customer.save() 
+      
+        
 
     #query or create the order
     order, created = Order.objects.get_or_create(customer=customer, complete=False)

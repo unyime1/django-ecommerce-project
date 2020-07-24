@@ -52,6 +52,6 @@ function updateUserOrder(productId, action) {
         //return data
     .then((data) => {
        // console.log('data:', data)
-        location.reload()
+       window.location.replace(" /cart/ ")
     })
 }

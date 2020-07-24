@@ -2,7 +2,7 @@
 
 if(shipping == 'False'){
     //hide shipping info if the product does not require shipping
-    document.getElementById('shipping-info').innerHTML = ''
+    document.getElementById('shipping-info').innerHTML = '' 
 }
 
 if(user != 'AnonymousUser'){
@@ -23,7 +23,6 @@ var form = document.getElementById('form')
 form.addEventListener('submit', function(e){
     //stop the form from acting upon submit
     e.preventDefault()
-    console.log('form submitted...')
     // add the hidden class to the element with a class of form-button
     document.getElementById('form-button').classList.add('hidden')
     // remove the hidden class from the element with a class of payment-info
@@ -36,7 +35,6 @@ document.getElementById('make-payment').addEventListener('click', function(e){
 
 function submitFormData(){
     //this function defines what happens when the make payment button is clicked
-    console.log('payment button clicked ...')
 
     var userFormData = {
         // this object contains info about the user
@@ -63,14 +61,16 @@ function submitFormData(){
         shippingInfo.state = form.state.value
         shippingInfo.zipcode = form.zipcode.value
         shippingInfo.country = form.country.value
+        userFormData.phonenumber = form.phonenumber.value
+        
     }
 
     if(user == 'AnonymousUser'){
         // this statement sets the value user information for anonymous users
         userFormData.first_name = form.first_name.value
         userFormData.last_name = form.last_name.value
-        userFormData.phonenumber = form.phonenumber.value
         userFormData.email = form.email.value
+        userFormData.phonenumber = form.phonenumber.value
     }
 
     //console.log('user info: ', userFormData)
